@@ -78,8 +78,6 @@ HMI connector and wire colours:
 
 </details>
 
-Photos by piotrek7700, originally posted in [the connection comment](https://github.com/maeek/ha-aux-cloud/discussions/89#discussioncomment-19351906).
-
 ## Controls and compatibility
 
 - Controls require a previously received **E2 settings frame** and fresh telemetry. If no E2 is stored, change a target temperature once on the HMI and allow reception. Writes stay blocked if no compatible E2 arrives.
