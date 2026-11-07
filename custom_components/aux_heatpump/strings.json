@@ -1,0 +1,376 @@
+{
+  "title": "AUX ACHP-H08",
+  "config": {
+    "step": {
+      "user": {
+        "title": "AUX ACHP-H08",
+        "description": "Connect to the USR TCP/RS485 bridge. Telemetry is received continuously. Explicit control commands and configuration reads are also supported.",
+        "data": {
+          "host": "USR host",
+          "port": "TCP port"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not receive a known AUX frame with valid CRC.",
+      "invalid_host": "Enter a host."
+    },
+    "abort": {
+      "already_configured": "This endpoint is already configured."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "suction": {
+        "name": "Suction temperature"
+      },
+      "discharge": {
+        "name": "Discharge temperature"
+      },
+      "outdoor": {
+        "name": "Outdoor temperature"
+      },
+      "exchanger": {
+        "name": "Heat exchanger temperature"
+      },
+      "inverter": {
+        "name": "Inverter temperature"
+      },
+      "dhw": {
+        "name": "DHW tank temperature"
+      },
+      "flh_inlet": {
+        "name": "FLH water inlet temperature"
+      },
+      "buffer": {
+        "name": "Buffer tank temperature"
+      },
+      "ibh_outlet": {
+        "name": "IBH water outlet temperature"
+      },
+      "water_inlet": {
+        "name": "Water inlet temperature"
+      },
+      "water_outlet": {
+        "name": "Water outlet temperature"
+      },
+      "refrigerant_inlet": {
+        "name": "Refrigerant inlet temperature"
+      },
+      "refrigerant_outlet": {
+        "name": "Refrigerant outlet temperature"
+      },
+      "heating_setpoint": {
+        "name": "Heating setpoint"
+      },
+      "dhw_setpoint": {
+        "name": "DHW setpoint"
+      },
+      "water_flow": {
+        "name": "Water flow"
+      },
+      "compressor_current": {
+        "name": "Compressor current"
+      },
+      "current": {
+        "name": "Input current"
+      },
+      "dc_voltage": {
+        "name": "DC bus voltage"
+      },
+      "expansion_valve": {
+        "name": "Expansion valve position"
+      },
+      "fan_speed": {
+        "name": "Fan speed"
+      },
+      "target_frequency": {
+        "name": "Target compressor frequency (candidate)"
+      },
+      "actual_frequency": {
+        "name": "Actual compressor frequency (D13 candidate)"
+      },
+      "frequency_d11": {
+        "name": "D11 frequency (candidate)"
+      },
+      "frequency_d37": {
+        "name": "D37 frequency (candidate)"
+      },
+      "pressure_raw": {
+        "name": "Pressure — raw A7–A8"
+      },
+      "pressure_estimated": {
+        "name": "Estimated pressure"
+      },
+      "firmware_jw_date": {
+        "name": "Indoor unit firmware date"
+      },
+      "firmware_jz_date": {
+        "name": "Outdoor unit firmware date"
+      },
+      "last_e2_received": {
+        "name": "Last E2 received"
+      }
+    },
+    "binary_sensor": {
+      "mv1_1": {
+        "name": "MV1_1 valve — DHW"
+      },
+      "mv1_2": {
+        "name": "MV1_2 valve"
+      },
+      "mv2": {
+        "name": "MV2 valve"
+      },
+      "mv3_1": {
+        "name": "MV3_1 valve"
+      },
+      "mv3_2": {
+        "name": "MV3_2 valve"
+      },
+      "pump_i": {
+        "name": "Internal pump PUMP_I"
+      },
+      "pump_o": {
+        "name": "Underfloor heating pump PUMP_O"
+      },
+      "pump_d": {
+        "name": "PUMP_D pump"
+      },
+      "pump_flh": {
+        "name": "PUMP_FLH pump"
+      },
+      "pump_s": {
+        "name": "PUMP_S pump"
+      },
+      "ibh": {
+        "name": "IBH inline heater"
+      },
+      "tbh": {
+        "name": "TBH tank heater"
+      },
+      "et_heater": {
+        "name": "ET E-HEATER"
+      },
+      "plate_heater": {
+        "name": "PLATE E-HEATER"
+      },
+      "heating_enabled": {
+        "name": "Heating enabled"
+      },
+      "dhw_enabled": {
+        "name": "DHW enabled"
+      },
+      "dhw_activity_d31": {
+        "name": "DHW D31 status (meaning unconfirmed)"
+      },
+      "fast_dhw_enabled": {
+        "name": "Fast hot water enabled"
+      }
+    },
+    "switch": {
+      "heating_enabled": {
+        "name": "Heating enabled"
+      },
+      "dhw_enabled": {
+        "name": "DHW enabled"
+      },
+      "fast_dhw_enabled": {
+        "name": "Fast hot water"
+      },
+      "dhw_mode_available": {
+        "name": "DHW mode availability"
+      },
+      "disinfection_allowed": {
+        "name": "Disinfection schedule allowed"
+      },
+      "dhw_priority": {
+        "name": "DHW priority"
+      },
+      "dhw_pump_available": {
+        "name": "DHW pump option"
+      },
+      "heating_mode_available": {
+        "name": "Heating mode availability"
+      },
+      "cooling_mode_available": {
+        "name": "Cooling mode availability"
+      }
+    },
+    "number": {
+      "heating_setpoint": {
+        "name": "Heating target temperature"
+      },
+      "dhw_setpoint": {
+        "name": "DHW target temperature"
+      },
+      "tao_dhwmax": {
+        "name": "Tao_DHWMAX — maximum DHW outdoor temperature"
+      },
+      "tao_dhwmin": {
+        "name": "Tao_DHWMIN — minimum DHW outdoor temperature"
+      },
+      "twt_di": {
+        "name": "Twt_DI — disinfection temperature"
+      },
+      "t_tbh_delay": {
+        "name": "t_TBH_DELAY — DHW heater delay"
+      },
+      "t_di_hightemp": {
+        "name": "t_DI_HIGHTEMP — disinfection holding time"
+      },
+      "t_di_max": {
+        "name": "t_DI_MAX — maximum disinfection time"
+      },
+      "t_dhwhp_restrict": {
+        "name": "t_DHWHP_RESTRICT — heating/cooling time limit"
+      },
+      "t_dhwhp_max": {
+        "name": "t_DHWHP_MAX — maximum DHW time"
+      },
+      "dhw_pump_runtime": {
+        "name": "DHW pump running time"
+      },
+      "tao_hmax": {
+        "name": "Tao_HMAX — maximum heating outdoor temperature"
+      },
+      "tao_hmin": {
+        "name": "Tao_HMIN — minimum heating outdoor temperature"
+      },
+      "tsetac_h1": {
+        "name": "TsetAC_H1 — water temperature at point 1"
+      },
+      "tsetac_h2": {
+        "name": "TsetAC_H2 — water temperature at point 2"
+      },
+      "tao_h1": {
+        "name": "Tao_H1 — outdoor temperature at point 1"
+      },
+      "tao_h2": {
+        "name": "Tao_H2 — outdoor temperature at point 2"
+      },
+      "dtsh_off": {
+        "name": "dTSH_OFF — heating switch-off differential"
+      },
+      "dtsh_on": {
+        "name": "dTSH_ON — heating switch-on differential"
+      },
+      "dtsdhw_on": {
+        "name": "dTSDHW_ON — DHW switch-on differential"
+      },
+      "tao_pump_on": {
+        "name": "Tao_pump_on"
+      }
+    },
+    "select": {
+      "zone1_emitter": {
+        "name": "Zone 1 heat emitter",
+        "state": {
+          "Kaloryfery": "Radiators",
+          "Podłogówka": "Underfloor heating",
+          "Klimakonwektory": "Fan coils"
+        }
+      },
+      "zone2_emitter": {
+        "name": "Zone 2 heat emitter",
+        "state": {
+          "Kaloryfery": "Radiators",
+          "Podłogówka": "Underfloor heating",
+          "Klimakonwektory": "Fan coils"
+        }
+      },
+      "integration_language": {
+        "name": "Integration language",
+        "state": {
+          "system": "System",
+          "pl": "Polish",
+          "en": "English"
+        }
+      }
+    },
+    "button": {
+      "refresh_parameters": {
+        "name": "Refresh settings"
+      }
+    },
+    "climate": {
+      "heating": {
+        "name": "Heating"
+      }
+    }
+  },
+  "exceptions": {
+    "unknown_control": {
+      "message": "Unknown control field."
+    },
+    "missing_e2": {
+      "message": "No E2 settings template. Change a setting once on the HMI to capture it. B3 cannot replace it."
+    },
+    "e2_not_sent": {
+      "message": "E2 command was not sent: {detail}"
+    },
+    "fast_requires_dhw": {
+      "message": "Enable DHW and wait for confirmation before enabling Fast hot water."
+    },
+    "disconnected": {
+      "message": "No TCP connection or current pump telemetry."
+    },
+    "resync": {
+      "message": "Waiting for a complete new telemetry snapshot after an unconfirmed command. The E2 template is retained."
+    },
+    "missing_telemetry": {
+      "message": "Missing control readings: {fields}"
+    },
+    "stale_telemetry": {
+      "message": "Outdated control readings: {fields}"
+    },
+    "not_ready": {
+      "message": "Control is not ready."
+    },
+    "readiness_lost": {
+      "message": "Control readiness was lost before 55. The command was not sent."
+    },
+    "fast_dhw_changed": {
+      "message": "DHW was disabled before 55. Fast hot water was not sent."
+    },
+    "e2_transport_error": {
+      "message": "E2 was not sent or a transport error occurred: {detail}"
+    },
+    "no_confirmation": {
+      "message": "No command confirmation from the pump. Check the HMI; the command may have been executed."
+    },
+    "b6_preflight": {
+      "message": "B6 parameter was not sent. Refresh or validation failed: {detail}"
+    },
+    "b6_not_ready": {
+      "message": "No connection or current configuration byte. Refresh settings and wait for the B3 reply."
+    },
+    "parameter_not_sent": {
+      "message": "Parameter was not sent: {detail}"
+    },
+    "b6_no_reply": {
+      "message": "No matching 03 reply to B6. Check the HMI setting. The command was not retried."
+    },
+    "b6_readback_failed": {
+      "message": "The pump acknowledged B6, but B3 readback timed out. Check the setting. The write was not retried."
+    },
+    "b6_readback_mismatch": {
+      "message": "B3 readback returned a different value. Check the HMI setting."
+    },
+    "b3_refresh_failed": {
+      "message": "Could not read B3 settings: {detail}. No settings were changed."
+    },
+    "heating_mode": {
+      "message": "Heating supports only heat and off modes."
+    },
+    "heating_range": {
+      "message": "Heating setpoint: {minimum}–{maximum}°C, in 1°C steps."
+    },
+    "invalid_name_language": {
+      "message": "Choose System, Polish or English."
+    },
+    "language_save_failed": {
+      "message": "Could not save the entity name language: {detail}"
+    }
+  }
+}

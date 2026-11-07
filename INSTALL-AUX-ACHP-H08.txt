@@ -1,0 +1,39 @@
+AUX ACHP-H08 — lokalna integracja Home Assistant
+Wersja 1.0.3
+
+INSTALACJA
+1. Skopiuj folder custom_components/aux_heatpump do /config/custom_components/ w HA.
+2. Uruchom ponownie Home Assistant (w Dockerze: kontener HA).
+3. W Ustawienia > Urządzenia i usługi > Dodaj integrację wybierz AUX ACHP-H08.
+4. Podaj adres IP i port swojego mostka RS485–TCP.
+
+MOSTEK RS485–TCP
+Tryb transparentny TCP Server, 9600 8N1, Modbus OFF, heartbeat OFF.
+Dla USR-DR164: Pack Interval 20 ms, TCP TimeOut 0; port zgodny z konfiguracją mostka.
+Integracja używa natywnego protokołu AUX, bez chmury, MQTT ani ESPHome.
+
+AKTUALIZACJA
+Nadpisz /config/custom_components/aux_heatpump i zrestartuj HA.
+Nie usuwaj wpisu integracji ani jej zapisów w .storage.
+
+UŻYTKOWANIE
+Odczyty parametrów, CO/CWU ON/OFF, temperatury zadane i Fast hot water.
+Termostat CO pokazuje temperaturę FLH W-IN. Język nazw wybierzesz na karcie urządzenia.
+Sterowanie wymaga zapamiętanego wzorca E2 i świeżych odczytów. Przy braku E2
+zmień raz nastawę na HMI; jeśli E2 nie nadejdzie, zapis pozostanie zablokowany.
+Fast hot water można włączyć po włączeniu zezwolenia CWU.
+Integracja okresowo odpytuje ustawienia; wyłączenie wpisu integracji zatrzymuje jej komunikację.
+
+KRÓTKA HISTORIA ZMIAN
+1.0.3 — Obsługa różnych długości ramki hydrauliki; poprawka zgłoszona przez lukaszer1.
+1.0.2 — Wybór języka przeniesiony do sekcji Sterowanie.
+1.0.1 — Dodano wybór języka nazw encji: systemowy, polski i angielski.
+1.0.0 — Tłumaczenia PL/EN oraz angielska tabela mapowania.
+0.6.6 — Poprawione sterowanie CO/CWU i odczyt zezwolenia CWU.
+
+ZGODNOŚĆ
+119 testów lokalnych przeszło; odczyty z 40 nagrań zgodne z v1.0.2.
+Inne długości ramek sprawdzono syntetycznie; starszy firmware przetestował lukaszer1.
+Brak nowej próby v1.0.3 na żywo. Ciśnienie pozostaje wartością szacowaną.
+Mapa parametrów: dołączone pliki XLSX/CSV. Szczegóły testów: replay-validation.json.
+Źródło poprawki: https://github.com/maeek/ha-aux-cloud/discussions/89#discussioncomment-19454813

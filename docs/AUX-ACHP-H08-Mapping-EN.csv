@@ -1,0 +1,83 @@
+﻿English name,Entity key,HA domain,Read frame / page,Read offset (decimal),Decoding / mask,Unit,Write frame / selector,Write offset / range,Evidence and limitations
+Suction temperature,suction,sensor,7E F1 F1 12 2D 00 12,23–24,Int16 BE / 10,°C,,,Mapped by HMI comparison and captures
+Discharge temperature,discharge,sensor,7E F1 F1 12 2D 00 12,11–12,Int16 BE / 10,°C,,,Mapped by HMI comparison and captures
+Outdoor temperature,outdoor,sensor,7E F1 F1 12 2D 00 12,25–26,Int16 BE / 10,°C,,,Mapped by HMI comparison and captures
+Heat exchanger temperature,exchanger,sensor,7E F1 F1 12 2D 00 12,31–32,Int16 BE / 10,°C,,,Mapped by HMI comparison and captures
+Inverter temperature,inverter,sensor,7E F1 F1 12 2D 00 12,35–36,Int16 BE / 10,°C,,,Mapped by HMI comparison and captures
+DHW tank temperature,dhw,sensor,7E 01 F1 05 2D,25–26,Int16 BE / 10,°C,,,Mapped by HMI comparison and captures
+FLH water inlet temperature,flh_inlet,sensor,7E 01 F1 05 2D,33–34,Int16 BE / 10,°C,,,Mapped by HMI comparison and captures
+Buffer tank temperature,buffer,sensor,7E 01 F1 05 2D,37–38,Int16 BE / 10,°C,,,Mapped by HMI comparison and captures
+IBH water outlet temperature,ibh_outlet,sensor,7E 01 F1 05 2D,19–20,Int16 BE / 10,°C,,,Mapped by HMI comparison and captures
+Water inlet temperature,water_inlet,sensor,7E 01 F1 05 2D,21–22,Int16 BE / 10,°C,,,Mapped by HMI comparison and captures
+Water outlet temperature,water_outlet,sensor,7E 01 F1 05 2D,23–24,Int16 BE / 10,°C,,,Mapped by HMI comparison and captures
+Refrigerant inlet temperature,refrigerant_inlet,sensor,7E 01 F1 02 31,23–24,Int16 BE / 10,°C,,,Mapped by HMI comparison and captures
+Refrigerant outlet temperature,refrigerant_outlet,sensor,7E 01 F1 02 31,25–26,Int16 BE / 10,°C,,,Mapped by HMI comparison and captures
+Heating setpoint,heating_setpoint,sensor,7E 01 F1 02 31,43–44,UInt16 BE / 10,°C,,,Mapped by HMI comparison and captures
+DHW setpoint,dhw_setpoint,sensor,7E 01 F1 05 2D,9–10,UInt16 BE / 10,°C,,,Mapped by HMI comparison and captures
+Water flow,water_flow,sensor,7E 01 F1 05 2D,17–18,UInt16 BE / 100,m³/h,,,Mapped by HMI comparison and captures
+Compressor current,compressor_current,sensor,7E F1 F1 12 2D 00 12,37–38,UInt16 BE / 10,A,,,Mapped by HMI comparison and captures
+Input current,current,sensor,7E F1 F1 12 2D 12 12,7–8,UInt16 BE / 10,A,,,Mapped by HMI comparison and captures
+DC bus voltage,dc_voltage,sensor,7E F1 F1 12 2D 12 12,9–10,UInt16 BE,V,,,Mapped by HMI comparison and captures
+Expansion valve position,expansion_valve,sensor,7E F1 F1 12 2D 12 12,21–22,UInt16 BE,PLS,,,Mapped by HMI comparison and captures
+Fan speed,fan_speed,sensor,7E F1 F1 12 2D 12 12,17–18,UInt16 BE,rpm,,,Mapped by HMI comparison and captures
+Target compressor frequency (candidate),target_frequency,sensor,7E F1 F1 12 2D 12 12,15–16,UInt16 BE / 10,Hz,,,Candidate: frequency field roles remain unconfirmed
+Actual compressor frequency (D13 candidate),actual_frequency,sensor,7E F1 F1 12 2D 12 12,13–14,UInt16 BE / 10,Hz,,,Candidate: frequency field roles remain unconfirmed
+D11 frequency (candidate),frequency_d11,sensor,7E F1 F1 12 2D 12 12,11–12,UInt16 BE / 10,Hz,,,Candidate: frequency field roles remain unconfirmed
+D37 frequency (candidate),frequency_d37,sensor,7E F1 F1 12 2D 12 12,37–38,UInt16 BE / 10,Hz,,,Candidate: frequency field roles remain unconfirmed
+Pressure — raw A7–A8,pressure_raw,sensor,7E F1 F1 12 2D 00 12,7–8,UInt16 BE,,,,UInt16 BE correlated with HMI pressure; physical encoding remains unconfirmed
+Estimated pressure,pressure_estimated,sensor,7E F1 F1 12 2D 00 12,7–8,Empirical cubic from UInt16 BE,kPa,,,Estimated only. raw 70..630 corresponds to HMI 894..3984 kPa. Not a documented sensor conversion.
+Indoor unit firmware date,firmware_jw_date,sensor,7E 01 F1 02 31,35–37,3-byte BCD YY MM DD,,,,Firmware date confirmed; version codes are not mapped
+Outdoor unit firmware date,firmware_jz_date,sensor,7E F1 F1 12 2D 24 12,33–35,3-byte BCD YY MM DD,,,,Firmware date confirmed; version codes are not mapped
+MV1_1 valve — DHW,mv1_1,binary_sensor,7E 01 F1 05 2D,13,Boolean & 0x02,,,,Output mapping confirmed by controlled HMI changes
+MV1_2 valve,mv1_2,binary_sensor,7E 01 F1 05 2D,13,Boolean & 0x01,,,,Output mapping confirmed by controlled HMI changes
+MV2 valve,mv2,binary_sensor,7E 01 F1 05 2D,14,Boolean & 0x08,,,,Output mapping confirmed by controlled HMI changes
+MV3_1 valve,mv3_1,binary_sensor,7E 01 F1 05 2D,29,Boolean & 0x01,,,,Output mapping confirmed by controlled HMI changes
+MV3_2 valve,mv3_2,binary_sensor,7E 01 F1 05 2D,29,Boolean & 0x02,,,,Output mapping confirmed by controlled HMI changes
+Internal pump PUMP_I,pump_i,binary_sensor,7E 01 F1 05 2D,13,Boolean & 0x10,,,,Output mapping confirmed by controlled HMI changes
+Underfloor heating pump PUMP_O,pump_o,binary_sensor,7E 01 F1 05 2D,13,Boolean & 0x04,,,,Output mapping confirmed by controlled HMI changes
+PUMP_D pump,pump_d,binary_sensor,7E 01 F1 05 2D,13,Boolean & 0x08,,,,Output mapping confirmed by controlled HMI changes
+PUMP_FLH pump,pump_flh,binary_sensor,7E 01 F1 05 2D,29,Boolean & 0x04,,,,Output mapping confirmed by controlled HMI changes
+PUMP_S pump,pump_s,binary_sensor,7E 01 F1 05 2D,13,Boolean & 0x20,,,,Output mapping confirmed by controlled HMI changes
+IBH inline heater,ibh,binary_sensor,7E 01 F1 05 2D,13,Boolean & 0x80,,,,Output mapping confirmed by controlled HMI changes
+TBH tank heater,tbh,binary_sensor,7E 01 F1 05 2D,13,Boolean & 0x40,,,,Output mapping confirmed by controlled HMI changes
+ET E-HEATER,et_heater,binary_sensor,7E 01 F1 05 2D,30,Boolean & 0x20,,,,Output mapping confirmed by controlled HMI changes
+PLATE E-HEATER,plate_heater,binary_sensor,7E 01 F1 05 2D,30,Boolean & 0x10,,,,Output mapping confirmed by controlled HMI changes
+Heating enabled,heating_enabled,binary_sensor,7E 01 F1 01 0D,5,Boolean & 0x80,,,,Heating permission feedback; does not prove compressor operation
+DHW enabled,dhw_enabled,binary_sensor,7E 01 F1 05 2D,7,Boolean & 0x01,,,,"Empirical permission feedback:03/13/53 = ON, 00 = OFF. Bits 0 and 1 were always equal in observed data."
+DHW D31 status (meaning unconfirmed),dhw_activity_d31,binary_sensor,7E F1 F1 12 2D 12 12,31,Boolean & 0x40,,,,Meaning unconfirmed. Changes after DHW routing; not used as DHW permission.
+Fast hot water enabled,fast_dhw_enabled,binary_sensor,7E 01 F1 05 2D,8,Boolean & 0x02,,,,Feedback mapping observed; no new end-to-end validation in the v0.6.6 user tests
+Last E2 received,last_e2_received,sensor,Observed valid E2,n/a,"UTC timestamp, persisted",,,,"Last observed E2 reception, not command execution; an echo may count as reception"
+Heating target temperature,heating_setpoint,number,7E 01 F1 02 31,43–44,UInt16 BE / 10,°C,7E E1 00 E2 1B,14–15; 20..60°C; step 1,ON/OFF and setpoint writes confirmed by user on v0.6.6; limits are integration limits
+DHW target temperature,dhw_setpoint,number,7E 01 F1 05 2D,9–10,UInt16 BE / 10,°C,7E E1 00 E2 1B,16–17; 30..60°C; step 1,ON/OFF and setpoint writes confirmed by user on v0.6.6; limits are integration limits
+Heating enabled,heating_enabled,switch,7E 01 F1 01 0D,5,Boolean & 0x80,,7E E1 00 E2 1B,byte 13 & 0x80,CO/DHW ON/OFF confirmed on v0.6.6; Fast hot water not newly validated. Requires DHW ON to enable Fast hot water.
+DHW enabled,dhw_enabled,switch,7E 01 F1 05 2D,7,Boolean & 0x01,,7E E1 00 E2 1B,byte 13 & 0x01,CO/DHW ON/OFF confirmed on v0.6.6; Fast hot water not newly validated. Requires DHW ON to enable Fast hot water.
+Fast hot water,fast_dhw_enabled,switch,7E 01 F1 05 2D,8,Boolean & 0x02,,7E E1 00 E2 1B,byte 19 & 0x02,CO/DHW ON/OFF confirmed on v0.6.6; Fast hot water not newly validated. Requires DHW ON to enable Fast hot water.
+Tao_DHWMAX — maximum DHW outdoor temperature,tao_dhwmax,number,03 reply to B3 page 0x0000,25,UInt8,°C,B6 selector 0x0011,byte 8; 35..43; step1,Selector mapped by controlled HMI tests. B3 reads verified; B6 write/readback reliability still under test.
+Tao_DHWMIN — minimum DHW outdoor temperature,tao_dhwmin,number,03 reply to B3 page 0x0000,26,Int8,°C,B6 selector 0x0012,byte 8; -25..5; step1,Selector mapped by controlled HMI tests. B3 reads verified; B6 write/readback reliability still under test.
+Twt_DI — disinfection temperature,twt_di,number,03 reply to B3 page 0x0000,27,UInt8,°C,B6 selector 0x0013,byte 8; 60..70; step1,Selector mapped by controlled HMI tests. B3 reads verified; B6 write/readback reliability still under test.
+t_TBH_DELAY — DHW heater delay,t_tbh_delay,number,03 reply to B3 page 0x0000,28,UInt8,min,B6 selector 0x0014,byte 8; 0..240; step1,Selector mapped by controlled HMI tests. B3 reads verified; B6 write/readback reliability still under test.
+t_DI_HIGHTEMP — disinfection holding time,t_di_hightemp,number,03 reply to B3 page 0x0000,29,UInt8,min,B6 selector 0x0015,byte 8; 5..60; step1,Selector mapped by controlled HMI tests. B3 reads verified; B6 write/readback reliability still under test.
+t_DI_MAX — maximum disinfection time,t_di_max,number,03 reply to B3 page 0x0000,30,UInt8 × 10,min,B6 selector 0x0016,byte 8; 90..300; step10,Selector mapped by controlled HMI tests. B3 reads verified; B6 write/readback reliability still under test.
+t_DHWHP_RESTRICT — heating/cooling time limit,t_dhwhp_restrict,number,03 reply to B3 page 0x0000,31,UInt8 × 10,min,B6 selector 0x0017,byte 8; 10..600; step10,Selector mapped by controlled HMI tests. B3 reads verified; B6 write/readback reliability still under test.
+t_DHWHP_MAX — maximum DHW time,t_dhwhp_max,number,03 reply to B3 page 0x0000,32,UInt8 × 10,min,B6 selector 0x0018,byte 8; 10..600; step10,Selector mapped by controlled HMI tests. B3 reads verified; B6 write/readback reliability still under test.
+DHW pump running time,dhw_pump_runtime,number,03 reply to B3 page 0x0000,33,UInt8 × 5,min,B6 selector 0x0019,byte 8; 5..120; step5,Selector mapped by controlled HMI tests. B3 reads verified; B6 write/readback reliability still under test.
+Tao_HMAX — maximum heating outdoor temperature,tao_hmax,number,03 reply to B3 page 0x0000,47,UInt8,°C,B6 selector 0x0027,byte 8; 20..35; step1,Selector mapped by controlled HMI tests. B3 reads verified; B6 write/readback reliability still under test.
+Tao_HMIN — minimum heating outdoor temperature,tao_hmin,number,03 reply to B3 page 0x0000,48,Int8,°C,B6 selector 0x0028,byte 8; -25..15; step1,Selector mapped by controlled HMI tests. B3 reads verified; B6 write/readback reliability still under test.
+TsetAC_H1 — water temperature at point 1,tsetac_h1,number,03 reply to B3 page 0x0000,49,UInt8,°C,B6 selector 0x0029,byte 8; 25..60; step1,Selector mapped by controlled HMI tests. B3 reads verified; B6 write/readback reliability still under test.
+TsetAC_H2 — water temperature at point 2,tsetac_h2,number,03 reply to B3 page 0x0000,50,UInt8,°C,B6 selector 0x002A,byte 8; 25..60; step1,Selector mapped by controlled HMI tests. B3 reads verified; B6 write/readback reliability still under test.
+Tao_H1 — outdoor temperature at point 1,tao_h1,number,03 reply to B3 page 0x0000,51,Int8,°C,B6 selector 0x002B,byte 8; -25..35; step1,Selector mapped by controlled HMI tests. B3 reads verified; B6 write/readback reliability still under test.
+Tao_H2 — outdoor temperature at point 2,tao_h2,number,03 reply to B3 page 0x0000,52,Int8,°C,B6 selector 0x002C,byte 8; -25..35; step1,Selector mapped by controlled HMI tests. B3 reads verified; B6 write/readback reliability still under test.
+dTSH_OFF — heating switch-off differential,dtsh_off,number,03 reply to B3 page 0x0000,53,UInt8,°C,B6 selector 0x002D,byte 8; 2..10; step1,Selector mapped by controlled HMI tests. B3 reads verified; B6 write/readback reliability still under test.
+dTSH_ON — heating switch-on differential,dtsh_on,number,03 reply to B3 page 0x0000,54,UInt8,°C,B6 selector 0x002E,byte 8; 0..10; step1,Selector mapped by controlled HMI tests. B3 reads verified; B6 write/readback reliability still under test.
+dTSDHW_ON — DHW switch-on differential,dtsdhw_on,number,03 reply to B3 page 0x0000,63,UInt8,°C,B6 selector 0x0037,byte 8; 2..10; step1,Selector mapped by controlled HMI tests. B3 reads verified; B6 write/readback reliability still under test.
+Tao_pump_on,tao_pump_on,number,03 reply to B3 page 0x003C,27,UInt8,°C,B6 selector 0x004F,byte 8; 3..6; step1,Selector mapped by controlled HMI tests. B3 reads verified; B6 write/readback reliability still under test. Only 3..6°C tested; full range and exact function unknown.
+DHW mode availability,dhw_mode_available,switch,03 reply to B3 page 0x0000,24,Boolean & 0x01,,B6 selector 0x0010,byte 8; ON/OFF,Selector mapped by controlled HMI tests. B3 reads verified; B6 write/readback reliability still under test.
+Disinfection schedule allowed,disinfection_allowed,switch,03 reply to B3 page 0x0000,24,Boolean & 0x02,,B6 selector 0x0010,byte 8; ON/OFF,Selector mapped by controlled HMI tests. B3 reads verified; B6 write/readback reliability still under test.
+DHW priority,dhw_priority,switch,03 reply to B3 page 0x0000,24,Boolean & 0x04,,B6 selector 0x0010,byte 8; ON/OFF,Selector mapped by controlled HMI tests. B3 reads verified; B6 write/readback reliability still under test.
+DHW pump option,dhw_pump_available,switch,03 reply to B3 page 0x0000,24,Boolean & 0x08,,B6 selector 0x0010,byte 8; ON/OFF,Selector mapped by controlled HMI tests. B3 reads verified; B6 write/readback reliability still under test.
+Heating mode availability,heating_mode_available,switch,03 reply to B3 page 0x0000,46,UInt8,,B6 selector 0x0026,byte 8; ON/OFF,Selector mapped by controlled HMI tests. B3 reads verified; B6 write/readback reliability still under test.
+Cooling mode availability,cooling_mode_available,switch,03 reply to B3 page 0x0000,34,UInt8,,B6 selector 0x001A,byte 8; ON/OFF,Selector mapped by controlled HMI tests. B3 reads verified; B6 write/readback reliability still under test.
+Zone 1 heat emitter,zone1_emitter,select,03 reply to B3 page 0x0000,56,Enum: 1 radiators; 2 underfloor; 3 fan coils,,B6 selector 0x0030,byte 8; 1/2/3,Selector mapped by controlled HMI tests. B3 reads verified; B6 write/readback reliability still under test.
+Zone 2 heat emitter,zone2_emitter,select,03 reply to B3 page 0x0000,57,Enum: 1 radiators; 2 underfloor; 3 fan coils,,B6 selector 0x0031,byte 8; 1/2/3,Selector mapped by controlled HMI tests. B3 reads verified; B6 write/readback reliability still under test.
+Refresh settings,refresh_parameters,button,B3 pages 0000 / 003C,n/a,60 bytes per page,,B3 read requests,No parameter write,Read-only refresh; may time out. Requests are active serial traffic.
+Heating,heating,climate,Composite: heating feedback + FLH inlet,n/a,Current temperature=flh_inlet,°C,E2 via heating controls,Heating OFF/HEAT and setpoint 20..60°C,"Uses existing E2 controls. Current temperature is FLH inlet water, not room temperature."

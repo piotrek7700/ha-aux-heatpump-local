@@ -1,0 +1,376 @@
+{
+  "title": "AUX ACHP-H08",
+  "config": {
+    "step": {
+      "user": {
+        "title": "AUX ACHP-H08",
+        "description": "Połącz z mostkiem TCP/RS485 USR. Integracja odbiera telemetrię, obsługuje jawne polecenia sterowania i odczyty konfiguracji.",
+        "data": {
+          "host": "Adres IP modułu USR",
+          "port": "Port TCP"
+        }
+      }
+    },
+    "error": {
+      "cannot_connect": "Nie odebrano znanej ramki AUX z poprawnym CRC. Sprawdź adres, port i połączenie pompy.",
+      "invalid_host": "Wpisz adres modułu USR."
+    },
+    "abort": {
+      "already_configured": "Ten adres i port są już skonfigurowane."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "suction": {
+        "name": "Temperatura ssania"
+      },
+      "discharge": {
+        "name": "Temperatura tłoczenia"
+      },
+      "outdoor": {
+        "name": "Temperatura zewnętrzna"
+      },
+      "exchanger": {
+        "name": "Temperatura wymiennika"
+      },
+      "inverter": {
+        "name": "Temperatura inwertera"
+      },
+      "dhw": {
+        "name": "Temperatura zbiornika CWU"
+      },
+      "flh_inlet": {
+        "name": "Temperatura FLH W-IN"
+      },
+      "buffer": {
+        "name": "Temperatura bufora"
+      },
+      "ibh_outlet": {
+        "name": "Temperatura IBH W-OUT"
+      },
+      "water_inlet": {
+        "name": "Temperatura wejścia wody"
+      },
+      "water_outlet": {
+        "name": "Temperatura wyjścia wody"
+      },
+      "refrigerant_inlet": {
+        "name": "Temperatura wejścia czynnika"
+      },
+      "refrigerant_outlet": {
+        "name": "Temperatura wyjścia czynnika"
+      },
+      "heating_setpoint": {
+        "name": "Nastawa CO"
+      },
+      "dhw_setpoint": {
+        "name": "Nastawa CWU"
+      },
+      "water_flow": {
+        "name": "Przepływ wody"
+      },
+      "compressor_current": {
+        "name": "Prąd sprężarki"
+      },
+      "current": {
+        "name": "Prąd"
+      },
+      "dc_voltage": {
+        "name": "Napięcie szyny DC"
+      },
+      "expansion_valve": {
+        "name": "Pozycja zaworu rozprężnego"
+      },
+      "fan_speed": {
+        "name": "Prędkość wentylatora"
+      },
+      "target_frequency": {
+        "name": "Docelowa częstotliwość sprężarki (kandydat)"
+      },
+      "actual_frequency": {
+        "name": "Aktualna częstotliwość sprężarki (kandydat D13)"
+      },
+      "frequency_d11": {
+        "name": "Częstotliwość D11 (kandydat)"
+      },
+      "frequency_d37": {
+        "name": "Częstotliwość D37 (kandydat)"
+      },
+      "pressure_raw": {
+        "name": "Ciśnienie — surowe A7–A8"
+      },
+      "pressure_estimated": {
+        "name": "Ciśnienie szacowane"
+      },
+      "firmware_jw_date": {
+        "name": "Data oprogramowania JW"
+      },
+      "firmware_jz_date": {
+        "name": "Data oprogramowania JZ"
+      },
+      "last_e2_received": {
+        "name": "Ostatni odbiór E2"
+      }
+    },
+    "binary_sensor": {
+      "mv1_1": {
+        "name": "Zawór MV1_1 — CWU"
+      },
+      "mv1_2": {
+        "name": "Zawór MV1_2"
+      },
+      "mv2": {
+        "name": "Zawór MV2"
+      },
+      "mv3_1": {
+        "name": "Zawór MV3_1"
+      },
+      "mv3_2": {
+        "name": "Zawór MV3_2"
+      },
+      "pump_i": {
+        "name": "Pompa wewnętrzna PUMP_I"
+      },
+      "pump_o": {
+        "name": "Pompa podłogówki PUMP_O"
+      },
+      "pump_d": {
+        "name": "Pompa PUMP_D"
+      },
+      "pump_flh": {
+        "name": "Pompa PUMP_FLH"
+      },
+      "pump_s": {
+        "name": "Pompa PUMP_S"
+      },
+      "ibh": {
+        "name": "Grzałka przepływowa IBH"
+      },
+      "tbh": {
+        "name": "Grzałka zbiornika TBH"
+      },
+      "et_heater": {
+        "name": "Grzałka ET E-HEATER"
+      },
+      "plate_heater": {
+        "name": "Grzałka PLATE E-HEATER"
+      },
+      "heating_enabled": {
+        "name": "CO włączone"
+      },
+      "dhw_enabled": {
+        "name": "CWU włączone"
+      },
+      "dhw_activity_d31": {
+        "name": "Status CWU D31 (znaczenie niepotwierdzone)"
+      },
+      "fast_dhw_enabled": {
+        "name": "Fast hot water włączone"
+      }
+    },
+    "switch": {
+      "heating_enabled": {
+        "name": "Zezwolenie CO"
+      },
+      "dhw_enabled": {
+        "name": "Zezwolenie CWU"
+      },
+      "fast_dhw_enabled": {
+        "name": "Fast hot water"
+      },
+      "dhw_mode_available": {
+        "name": "Dostępność trybu CWU"
+      },
+      "disinfection_allowed": {
+        "name": "Zezwolenie na harmonogram dezynfekcji"
+      },
+      "dhw_priority": {
+        "name": "Priorytet CWU"
+      },
+      "dhw_pump_available": {
+        "name": "Opcja pompy CWU"
+      },
+      "heating_mode_available": {
+        "name": "Dostępność trybu grzania"
+      },
+      "cooling_mode_available": {
+        "name": "Dostępność trybu chłodzenia"
+      }
+    },
+    "number": {
+      "heating_setpoint": {
+        "name": "Temperatura zadana CO"
+      },
+      "dhw_setpoint": {
+        "name": "Temperatura zadana CWU"
+      },
+      "tao_dhwmax": {
+        "name": "Tao_DHWMAX — maks. temperatura zewnętrzna CWU"
+      },
+      "tao_dhwmin": {
+        "name": "Tao_DHWMIN — min. temperatura zewnętrzna CWU"
+      },
+      "twt_di": {
+        "name": "Twt_DI — temperatura dezynfekcji"
+      },
+      "t_tbh_delay": {
+        "name": "t_TBH_DELAY — opóźnienie grzałki CWU"
+      },
+      "t_di_hightemp": {
+        "name": "t_DI_HIGHTEMP — czas utrzymania dezynfekcji"
+      },
+      "t_di_max": {
+        "name": "t_DI_MAX — maks. czas dezynfekcji"
+      },
+      "t_dhwhp_restrict": {
+        "name": "t_DHWHP_RESTRICT — czas grzania/chłodzenia"
+      },
+      "t_dhwhp_max": {
+        "name": "t_DHWHP_MAX — maks. czas CWU"
+      },
+      "dhw_pump_runtime": {
+        "name": "Czas pracy pompy CWU"
+      },
+      "tao_hmax": {
+        "name": "Tao_HMAX — maks. temperatura zewnętrzna CO"
+      },
+      "tao_hmin": {
+        "name": "Tao_HMIN — min. temperatura zewnętrzna CO"
+      },
+      "tsetac_h1": {
+        "name": "TsetAC_H1 — temperatura wody punkt 1"
+      },
+      "tsetac_h2": {
+        "name": "TsetAC_H2 — temperatura wody punkt 2"
+      },
+      "tao_h1": {
+        "name": "Tao_H1 — temperatura zewnętrzna punkt 1"
+      },
+      "tao_h2": {
+        "name": "Tao_H2 — temperatura zewnętrzna punkt 2"
+      },
+      "dtsh_off": {
+        "name": "dTSH_OFF — różnica wyłączenia CO"
+      },
+      "dtsh_on": {
+        "name": "dTSH_ON — różnica włączenia CO"
+      },
+      "dtsdhw_on": {
+        "name": "dTSDHW_ON — różnica włączenia CWU"
+      },
+      "tao_pump_on": {
+        "name": "Tao_pump_on"
+      }
+    },
+    "select": {
+      "zone1_emitter": {
+        "name": "Strefa 1 — rodzaj odbiornika",
+        "state": {
+          "Kaloryfery": "Kaloryfery",
+          "Podłogówka": "Podłogówka",
+          "Klimakonwektory": "Klimakonwektory"
+        }
+      },
+      "zone2_emitter": {
+        "name": "Strefa 2 — rodzaj odbiornika",
+        "state": {
+          "Kaloryfery": "Kaloryfery",
+          "Podłogówka": "Podłogówka",
+          "Klimakonwektory": "Klimakonwektory"
+        }
+      },
+      "integration_language": {
+        "name": "Język integracji",
+        "state": {
+          "system": "Systemowy",
+          "pl": "Polski",
+          "en": "English"
+        }
+      }
+    },
+    "button": {
+      "refresh_parameters": {
+        "name": "Odśwież ustawienia"
+      }
+    },
+    "climate": {
+      "heating": {
+        "name": "CO"
+      }
+    }
+  },
+  "exceptions": {
+    "unknown_control": {
+      "message": "Nieznane pole sterowania"
+    },
+    "missing_e2": {
+      "message": "Brak wzorca E2. Zmień raz nastawę na HMI, aby go zapisać. B3 go nie zastępuje."
+    },
+    "e2_not_sent": {
+      "message": "Polecenia E2 nie wysłano: {detail}"
+    },
+    "fast_requires_dhw": {
+      "message": "Najpierw włącz Zezwolenie CWU i poczekaj na potwierdzenie. Fast hot water wymaga CWU ON."
+    },
+    "disconnected": {
+      "message": "Brak połączenia TCP lub bieżącej telemetrii pompy."
+    },
+    "resync": {
+      "message": "Po niepotwierdzonym poleceniu czekam na ponowny komplet odczytów. Wzorzec E2 jest zachowany."
+    },
+    "missing_telemetry": {
+      "message": "Brakuje odczytów sterowania: {fields}"
+    },
+    "stale_telemetry": {
+      "message": "Nieaktualne odczyty sterowania: {fields}"
+    },
+    "not_ready": {
+      "message": "Sterowanie niegotowe."
+    },
+    "readiness_lost": {
+      "message": "Utracono gotowość przed 55; polecenia nie wysłano."
+    },
+    "fast_dhw_changed": {
+      "message": "CWU zostało wyłączone przed 55; Fast hot water nie wysłano."
+    },
+    "e2_transport_error": {
+      "message": "E2 nie wysłano lub wystąpił błąd transportu: {detail}"
+    },
+    "no_confirmation": {
+      "message": "Brak potwierdzenia polecenia z pompy. Sprawdź panel; polecenie mogło zostać wykonane."
+    },
+    "b6_preflight": {
+      "message": "Parametru B6 nie wysłano; odświeżenie lub walidacja nie powiodły się: {detail}"
+    },
+    "b6_not_ready": {
+      "message": "Brak połączenia lub bieżącego bajtu konfiguracji. Odśwież ustawienia i poczekaj na B3."
+    },
+    "parameter_not_sent": {
+      "message": "Parametru nie wysłano: {detail}"
+    },
+    "b6_no_reply": {
+      "message": "Brak zgodnej odpowiedzi 03 na B6. Sprawdź ustawienie na panelu; polecenia nie ponowiono."
+    },
+    "b6_readback_failed": {
+      "message": "Pompa potwierdziła B6, ale kontrolny odczyt B3 nie odpowiedział. Sprawdź ustawienie; zapisu nie ponowiono."
+    },
+    "b6_readback_mismatch": {
+      "message": "Kontrolny odczyt B3 zwrócił inną wartość niż żądana. Sprawdź ustawienie na panelu."
+    },
+    "b3_refresh_failed": {
+      "message": "Nie udało się odczytać ustawień B3: {detail}. Nie zmieniono nastaw."
+    },
+    "heating_mode": {
+      "message": "CO obsługuje wyłącznie grzanie i wyłączenie."
+    },
+    "heating_range": {
+      "message": "Nastawa CO: {minimum}–{maximum}°C, krok 1°C."
+    },
+    "invalid_name_language": {
+      "message": "Wybierz Systemowy, Polski albo English."
+    },
+    "language_save_failed": {
+      "message": "Nie udało się zapisać języka nazw: {detail}"
+    }
+  }
+}
