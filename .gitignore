@@ -7,3 +7,4 @@ __pycache__/
 captures/
 tmp/
 *.zip
+/INSTALL-AUX-ACHP-H08.txt
