@@ -88,8 +88,6 @@ HMI connector and wire colours:
 - Active disinfection and the GAZ/external heat-source request are not confirmed mappings. Energy consumption is not mapped.
 - Settings are polled periodically. Disable the integration entry to stop its communication; disabling control entities alone does not stop polling.
 
-Validation for 1.0.3: **119 local tests** and comparison of **40 captures / 227,306 valid frames**, with unchanged decoded values versus 1.0.2. Other hydraulic-frame lengths were tested synthetically; no raw older-firmware capture was available. Version 1.0.3 has not received a new live test on the author's pump.
-
 ## Mapping
 
 [Excel mapping table](docs/AUX-ACHP-H08-Mapping-EN.xlsx) · [CSV mapping table](docs/AUX-ACHP-H08-Mapping-EN.csv)
