@@ -31,9 +31,11 @@ class AuxSensor(AuxNames, CoordinatorEntity, SensorEntity):
             self._attr_suggested_display_precision = 0
             self._attr_extra_state_attributes = {
                 "interpretation": "empirical approximation, not confirmed by a manufacturer specification",
-                "source": "A7–A8 UInt16BE",
-                "validated_raw_range": "70..630",
-                "validated_hmi_range_kpa": "894..3984",
+                "source": "A7–A8 Int16BE",
+                "validated_raw_range": "-70..630",
+                "validated_hmi_range_kpa": "536..3984",
+                "low_range_calibration": "raw -70 = 536 kPa; interpolation to raw 70",
+                "raw_diagnostic_encoding": "pressure_raw remains UInt16BE",
             }
         elif "frequency" in field.key:
             self._attr_extra_state_attributes = {

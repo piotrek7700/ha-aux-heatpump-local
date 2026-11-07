@@ -87,7 +87,25 @@ class ProtocolTests(unittest.TestCase):
     def test_pressure_estimate_range(self):
         for raw,kpa in ((70,894),(140,1121),(500,2966),(630,3984)):
             self.assertLessEqual(abs(p.estimate_pressure(raw)-kpa),1.3)
-        for raw in (0,69,631,65535):self.assertIsNone(p.estimate_pressure(raw))
+        for raw in (-71,631,65535):self.assertIsNone(p.estimate_pressure(raw))
+
+    def test_captured_negative_pressure_word(self):
+        # Stable final readings in the 2026-11-07 recording: HMI 536 kPa.
+        field = next(f for f in p.FIELDS if f.key == 'pressure_estimated')
+        f = bytearray(45); f[:len(field.prefix)] = field.prefix
+        f[7:9] = bytes.fromhex('ff ba')
+        f[-2:] = p.crc16(f[1:-2]).to_bytes(2,'little')
+        values = p.decode_frame(p.StreamParser().feed(f)[0])
+        self.assertEqual(values['pressure_raw'],65466)
+        self.assertEqual(values['pressure_estimated'],536.0)
+
+    def test_low_pressure_monotonic_and_high_range_unchanged(self):
+        values = [p.estimate_pressure(x) for x in range(-70,631)]
+        self.assertTrue(all(a < b for a,b in zip(values,values[1:])))
+        for x in range(70,631):
+            old = round(((0.000002039384559*x+0.002925489799)*x+2.560974567)*x+699.504062722,1)
+            self.assertEqual(p.estimate_pressure(x),old)
+        self.assertIsNone(p.estimate_pressure(-999))
 
     def test_source_and_json_files(self):
         for f in COMPONENT.rglob('*.py'):compile(f.read_text(encoding='utf-8-sig'),str(f),'exec')

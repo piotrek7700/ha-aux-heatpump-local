@@ -1,7 +1,7 @@
 {
   "domain": "aux_heatpump",
   "name": "AUX ACHP-H08",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "config_flow": true,
   "documentation": "https://github.com/piotrek7700/ha-aux-heatpump-local",
   "iot_class": "local_push",

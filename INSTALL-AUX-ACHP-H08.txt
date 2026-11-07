@@ -1,5 +1,5 @@
 AUX ACHP-H08 — lokalna integracja Home Assistant
-Wersja 1.0.3
+Wersja 1.0.4
 
 INSTALACJA
 1. Skopiuj folder custom_components/aux_heatpump do /config/custom_components/ w HA.
@@ -25,6 +25,7 @@ Fast hot water można włączyć po włączeniu zezwolenia CWU.
 Integracja okresowo odpytuje ustawienia; wyłączenie wpisu integracji zatrzymuje jej komunikację.
 
 KRÓTKA HISTORIA ZMIAN
+1.0.4 — Naprawiono niedostępne niskie ciśnienie; odczyt ze znakiem i punkt 536 kPa.
 1.0.3 — Obsługa różnych długości ramki hydrauliki; poprawka zgłoszona przez lukaszer1.
 1.0.2 — Wybór języka przeniesiony do sekcji Sterowanie.
 1.0.1 — Dodano wybór języka nazw encji: systemowy, polski i angielski.

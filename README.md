@@ -82,9 +82,9 @@ HMI connector and wire colours:
 
 - Controls require a previously received **E2 settings frame** and fresh telemetry. If no E2 is stored, change a target temperature once on the HMI and allow reception. Writes stay blocked if no compatible E2 arrives.
 - The last observed settings frame is saved across restarts. Fast hot water requires DHW permission ON before it can be enabled.
-- Heating/DHW switching and temperature control were confirmed on the author's TCP setup with the 0.6.6 control implementation retained in 1.0.3.
+- Heating/DHW switching and temperature control were confirmed on the author's TCP setup with the 0.6.6 control implementation retained in 1.0.4.
 - Version 1.0.3 accepts different hydraulic-frame lengths following **lukaszer1's older-firmware finding** (JW 2022-12-12 / JZ 2022-12-09). His missing-E2 control issue is separate and is not fixed by this change.
-- Pressure is an empirical estimate, validated over approximately **894–3984 kPa**. Compressor frequency roles remain experimental.
+- Pressure is an empirical estimate over approximately **536–3984 kPa**; the lower segment is interpolated from the new 536 kPa point to the existing curve. Compressor frequency roles remain experimental.
 - Active disinfection and the GAZ/external heat-source request are not confirmed mappings. Energy consumption is not mapped.
 - Settings are polled periodically. Disable the integration entry to stop its communication; disabling control entities alone does not stop polling.
 
@@ -92,10 +92,11 @@ HMI connector and wire colours:
 
 [Excel mapping table](docs/AUX-ACHP-H08-Mapping-EN.xlsx) · [CSV mapping table](docs/AUX-ACHP-H08-Mapping-EN.csv)
 
-The table is the 1.0.0 reference. Its B-frame length `2D` describes the original captures; 1.0.3 accepts other lengths while keeping field offsets unchanged.
+The table is the 1.0.0 reference. Its B-frame length `2D` describes the original captures; 1.0.3 accepts other lengths while keeping field offsets unchanged. Pressure in 1.0.4 uses signed A7–A8 and a lower-range interpolation; the raw diagnostic remains unsigned.
 
 ## Release notes
 
+- **1.0.4** — Fixed unavailable low-pressure readings by interpreting the pressure word as signed; added the 536 kPa calibration point.
 - **1.0.3** — Different hydraulic-frame lengths; fix reported by lukaszer1.
 - **1.0.2** — Language selector moved to Controls.
 - **1.0.1** — Added System/Polish/English entity-name selection.

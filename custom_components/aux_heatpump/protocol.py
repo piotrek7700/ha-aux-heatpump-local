@@ -51,7 +51,7 @@ FIELDS = (
     Field("frequency_d11", "Częstotliwość D11 (kandydat)", D, 11, 10, False, "frequency", "Hz", False, True),
     Field("frequency_d37", "Częstotliwość D37 (kandydat)", D, 37, 10, False, "frequency", "Hz", False, True),
     Field("pressure_raw", "Ciśnienie — surowe A7–A8", A, 7, 1, False, "", None, True, True),
-    Field("pressure_estimated", "Ciśnienie szacowane", A, 7, 1, False, "pressure", "kPa"),
+    Field("pressure_estimated", "Ciśnienie szacowane", A, 7, 1, True, "pressure", "kPa"),
 )
 
 @dataclass(frozen=True)
@@ -114,9 +114,18 @@ def crc16(data: bytes) -> int:
 
 
 def estimate_pressure(raw: int) -> float | None:
-    """Empirical HMI approximation, verified only for raw 70..630 (894..3984 kPa)."""
-    if not 70 <= raw <= 630:
+    """Empirical estimate from signed A7-A8; no extrapolation beyond anchors.
+
+    Raw -70 = HMI 536 kPa (2026-11-07). The sparsely calibrated lower segment
+    interpolates to the unchanged 2023 high-range approximation at raw 70.
+    The pressure_raw diagnostic intentionally retains the unsigned wire word.
+    """
+    if not -70 <= raw <= 630:
         return None
+    if raw < 70:
+        upper = ((0.000002039384559 * 70 + 0.002925489799) * 70
+                 + 2.560974567) * 70 + 699.504062722
+        return round(536.0 + (raw + 70) * (upper - 536.0) / 140, 1)
     return round(((0.000002039384559 * raw + 0.002925489799) * raw
                   + 2.560974567) * raw + 699.504062722, 1)
 
