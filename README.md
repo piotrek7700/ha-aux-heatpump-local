@@ -2,7 +2,7 @@
 
 Local Home Assistant integration for AUX ACHP-H08 R32 heat pumps using the native RS485 protocol and a transparent TCP gateway. No AUX Cloud, MQTT or ESPHome required.
 
-Developed with an **AUX ACHP-H08/4R3HA-I** and a **USR-DR164**. Background and community testing: [original discussion](https://github.com/maeek/ha-aux-cloud/discussions/89).
+Developed with an **AUX ACHP-H08/4R3HA-I** and a **USR-DR164**.
 
 ## Features
 
