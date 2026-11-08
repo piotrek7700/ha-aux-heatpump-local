@@ -8,3 +8,5 @@ captures/
 tmp/
 *.zip
 /INSTALL-AUX-ACHP-H08.txt
+
+/aux_heatpump_captures/

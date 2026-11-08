@@ -11,6 +11,7 @@ from homeassistant.helpers.storage import Store
 from .errors import localized_error
 from .names import NAME_LANGUAGES, load_name_catalogs
 from .connection import Receiver
+from .recorder import FrameRecorder
 from .entity_upgrade import enable_default_entities
 from .const import DOMAIN, NAME, STALE_SECONDS, VERSION
 from .control import CONTROL_KEYS, is_settings_frame, make_command
@@ -29,10 +30,18 @@ class AuxCoordinator(DataUpdateCoordinator):
     def __init__(self, hass, entry):
         super().__init__(hass, logging.getLogger(__name__), name=NAME)
         self._aux_hass = hass
+        self.entry_id = entry.entry_id
         self.name_language = "system"
         self.entity_name_catalogs = {}
         self.name_language_store = Store(hass, 1, f"{DOMAIN}.{entry.entry_id}.preferences")
         self.name_language_lock = asyncio.Lock()
+        self.recording_store = Store(hass, 1, f"{DOMAIN}.{entry.entry_id}.recording")
+        self.recording_lock = asyncio.Lock()
+        capture_dir = hass.config.path("aux_heatpump_captures", entry.entry_id) if hass is not None else None
+        executor = hass.async_add_executor_job if hass is not None else None
+        task_factory = (lambda coro: hass.async_create_background_task(coro, "AUX frame recorder")) if hass is not None else None
+        self.recorder = FrameRecorder(capture_dir, executor=executor,
+                                      notify=self.recording_changed, task_factory=task_factory)
         self.data = {}
         self.seen = {}
         self.connected = False
@@ -64,6 +73,65 @@ class AuxCoordinator(DataUpdateCoordinator):
         self.receiver = Receiver(entry.data[CONF_HOST], entry.data[CONF_PORT],
                                  self.receive, self.disconnect, self.receive_frame)
         self.task = None
+
+    @callback
+    def recording_changed(self):
+        self.async_set_updated_data(dict(self.data))
+
+    async def restore_recording(self):
+        try:
+            stored = await self.recording_store.async_load()
+            if not isinstance(stored, dict) or not stored.get("enabled"):
+                return
+            expires = datetime.fromisoformat(stored["expires_at"])
+            started = datetime.fromisoformat(stored["started_at"])
+            if expires.tzinfo is None or started.tzinfo is None:
+                return
+            # Never extend a saved session or accept a deadline beyond seven days.
+            now = datetime.now(timezone.utc)
+            if now < expires <= now + timedelta(days=7):
+                await self.recorder.start(expires_at=expires, started_at=started)
+        except (OSError, ValueError, KeyError, TypeError, HomeAssistantError) as err:
+            self.recorder.last_error = f"Cannot restore recording: {err}"
+            _LOGGER.warning("AUX frame recording restore failed: %s", err)
+
+    async def async_start_recording(self):
+        async with self.recording_lock:
+            try:
+                await self.recorder.start()
+                await self.recording_store.async_save({"enabled": True,
+                    "started_at": self.recorder.started_at.isoformat(),
+                    "expires_at": self.recorder.expires_at.isoformat()})
+            except (OSError, ValueError, HomeAssistantError) as err:
+                await self.recorder.stop(reason="start_error")
+                self.recorder.last_error = str(err)
+                self.recording_changed()
+                raise localized_error("recording_failed", detail=str(err)) from err
+
+    async def async_stop_recording(self):
+        async with self.recording_lock:
+            await self.recorder.stop()
+            try:
+                await self.recording_store.async_save({"enabled": False})
+            except (OSError, HomeAssistantError) as err:
+                raise localized_error("recording_failed", detail=str(err)) from err
+
+    async def async_download_recording(self):
+        try:
+            await self.recorder.export()
+            from homeassistant.components import persistent_notification
+            from homeassistant.components.http.auth import async_sign_path
+            path = f"/api/aux_heatpump/captures/{self.entry_id}"
+            url = async_sign_path(self._aux_hass, path, timedelta(minutes=10))
+            polish = self.effective_name_language == "pl"
+            message = (f"[Pobierz ZIP z nagraniem]({url}) — link ważny 10 minut." if polish else
+                       f"[Download recording ZIP]({url}) — link valid for 10 minutes.")
+            persistent_notification.async_create(self._aux_hass, message,
+                title="Nagranie AUX" if polish else "AUX recording",
+                notification_id=f"aux_heatpump_recording_{self.entry_id}")
+            self.recording_changed()
+        except (OSError, ValueError, HomeAssistantError) as err:
+            raise localized_error("recording_failed", detail=str(err)) from err
 
     @property
     def effective_name_language(self):
@@ -130,6 +198,7 @@ class AuxCoordinator(DataUpdateCoordinator):
 
     @callback
     def receive_frame(self, frame):
+        self.recorder.add(frame)
         block = block_reply_payload(frame)
         if block is not None:
             start, raw_bytes = block
@@ -583,6 +652,7 @@ class AuxCoordinator(DataUpdateCoordinator):
             except asyncio.CancelledError:
                 pass
             self.task = None
+        await self.recorder.stop(reason="unload")
         if self.parameter_raw:
             try:
                 await self.parameter_store.async_save(self.parameter_storage_data())
@@ -602,7 +672,12 @@ async def async_setup_entry(hass, entry):
     await coordinator.restore_settings()
     await coordinator.restore_parameters()
     hass.data.setdefault(DOMAIN, {})[entry.entry_id] = coordinator
+    if not hass.data[DOMAIN].get("_capture_download_view"):
+        from .download import CaptureDownloadView
+        hass.http.register_view(CaptureDownloadView(hass))
+        hass.data[DOMAIN]["_capture_download_view"] = True
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
+    await coordinator.restore_recording()
     entry.async_on_unload(async_track_time_interval(hass, coordinator.expire, timedelta(seconds=15)))
     @callback
     def on_stop(_event):

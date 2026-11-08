@@ -83,11 +83,23 @@ HMI connector and wire colours:
 
 - Controls require a previously received **E2 settings frame** and fresh telemetry. If no E2 is stored, change a target temperature once on the HMI and allow reception. Writes stay blocked if no compatible E2 arrives.
 - The last observed settings frame is saved across restarts. Fast hot water requires DHW permission ON before it can be enabled.
-- Heating/DHW switching and temperature control were confirmed on the author's TCP setup with the 0.6.6 control implementation retained in 1.0.5.
+- Heating/DHW switching and temperature control were confirmed on the author's TCP setup with the 0.6.6 control implementation retained in 1.0.6.
 - Version 1.0.3 accepts different hydraulic-frame lengths following **lukaszer1's older-firmware finding** (JW 2022-12-12 / JZ 2022-12-09). His missing-E2 control issue is separate and is not fixed by this change.
 - Pressure is an empirical estimate over approximately **536–3984 kPa**; the lower segment is interpolated from the new 536 kPa point to the existing curve. Compressor frequency roles remain experimental.
 - Active disinfection and the GAZ/external heat-source request are not confirmed mappings. Energy consumption is not mapped.
 - Settings are polled periodically. Disable the integration entry to stop its communication; disabling control entities alone does not stop polling.
+
+## Diagnostic frame recording
+
+On the device page under **Diagnostics**:
+
+- **Record frames (7 days)** starts local recording; **Stop frame recording** stops it.
+- **Frame recording** shows whether recording is active, the deadline, last written frame and any errors.
+- **Download recordings** creates a ZIP and shows a notification with a download link valid for 10 minutes. Recording can continue during export.
+
+Files are saved in `/config/aux_heatpump_captures/<entry_id>/`. Only received CRC-valid frames are recorded, with UTC timestamps. Recording itself sends no commands and resumes after a Home Assistant restart until its original deadline.
+
+Raw recordings rotate at **512 MiB per device**, keeping the newest files. One download ZIP (and temporary space while building it) uses additional disk space. Files stay local and are not uploaded automatically.
 
 ## Mapping
 
@@ -97,6 +109,7 @@ The table is the 1.0.0 reference. Its B-frame length `2D` describes the original
 
 ## Release notes
 
+- **1.0.6** — Added seven-day diagnostic frame recording, stop/status controls and ZIP download.
 - **1.0.5** — Added the read-only Defrost (candidate) diagnostic entity.
 - **1.0.4** — Fixed unavailable low-pressure readings by interpreting the pressure word as signed; added the 536 kPa calibration point.
 - **1.0.3** — Different hydraulic-frame lengths; fix reported by lukaszer1.
