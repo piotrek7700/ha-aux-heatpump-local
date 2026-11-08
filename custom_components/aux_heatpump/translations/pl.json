@@ -166,6 +166,9 @@
       },
       "fast_dhw_enabled": {
         "name": "Fast hot water włączone"
+      },
+      "defrost_candidate": {
+        "name": "Odszranianie (kandydat)"
       }
     },
     "switch": {

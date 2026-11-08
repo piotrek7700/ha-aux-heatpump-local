@@ -107,6 +107,18 @@ class ProtocolTests(unittest.TestCase):
             self.assertEqual(p.estimate_pressure(x),old)
         self.assertIsNone(p.estimate_pressure(-999))
 
+    def test_defrost_candidate_mask_and_labels(self):
+        field = next(f for f in p.BINARY_FIELDS if f.key == 'defrost_candidate')
+        self.assertTrue(field.diagnostic)
+        self.assertTrue(field.enabled)
+        for status, expected in ((0x00,False),(0x40,False),(0x60,True),(0x20,True),(0x80,False),(0xa0,True)):
+            f = bytearray(45); f[:len(p.D)] = p.D; f[32] = status
+            f[-2:] = p.crc16(f[1:-2]).to_bytes(2,'little')
+            self.assertIs(p.decode_frame(p.StreamParser().feed(f)[0])['defrost_candidate'],expected)
+        for lang, label in (('pl','Odszranianie (kandydat)'),('en','Defrost (candidate)')):
+            catalog=json.loads((COMPONENT/f'translations/{lang}.json').read_text(encoding='utf-8'))
+            self.assertEqual(catalog['entity']['binary_sensor']['defrost_candidate']['name'],label)
+
     def test_source_and_json_files(self):
         for f in COMPONENT.rglob('*.py'):compile(f.read_text(encoding='utf-8-sig'),str(f),'exec')
         for f in COMPONENT.rglob('*.json'):json.loads(f.read_text(encoding='utf-8-sig'))

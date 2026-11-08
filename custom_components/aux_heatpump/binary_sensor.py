@@ -24,6 +24,8 @@ class AuxBinarySensor(AuxNames, CoordinatorEntity, BinarySensorEntity):
         self._attr_entity_registry_enabled_default = field.enabled
         if field.diagnostic:
             self._attr_entity_category = EntityCategory.DIAGNOSTIC
+        if field.key == "defrost_candidate":
+            self._attr_icon = "mdi:snowflake"
         self._attr_device_info = DeviceInfo(identifiers={(DOMAIN, entry.entry_id)},
                                            name=NAME, manufacturer="AUX", model="ACHP-H08")
 
@@ -33,6 +35,10 @@ class AuxBinarySensor(AuxNames, CoordinatorEntity, BinarySensorEntity):
 
     @property
     def extra_state_attributes(self):
+        if self.field.key == "defrost_candidate":
+            return {"source": "D32 & 0x20", "frame_prefix": "7e f1 f1 12 2d 12 12",
+                    "offset_base": 0, "interpretation": "candidate defrost status",
+                    "validation": "one cycle confirmed by HMI snowflake; repeat validation needed"}
         if self.field.key == "dhw_enabled":
             return {"source": "B7 & 0x01", "interpretation": "DHW permission; empirical mapping"}
         if self.field.key == "dhw_activity_d31":

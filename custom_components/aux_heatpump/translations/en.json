@@ -166,6 +166,9 @@
       },
       "fast_dhw_enabled": {
         "name": "Fast hot water enabled"
+      },
+      "defrost_candidate": {
+        "name": "Defrost (candidate)"
       }
     },
     "switch": {

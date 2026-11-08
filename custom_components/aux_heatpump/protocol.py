@@ -85,6 +85,8 @@ BINARY_FIELDS = (
     BinaryField("dhw_enabled", "CWU włączone", B, 7, 0x01),
     BinaryField("dhw_activity_d31", "Status CWU D31 (znaczenie niepotwierdzone)", D, 31, 0x40, diagnostic=True),
     BinaryField("fast_dhw_enabled", "Fast hot water włączone", B, 8, 0x02),
+    # One HMI-snowflake-confirmed cycle; candidate, not a manufacturer mapping.
+    BinaryField("defrost_candidate", "Odszranianie (kandydat)", D, 32, 0x20, diagnostic=True),
 )
 
 # Firmware dates match the photographed display; version codes are still uncertain.
