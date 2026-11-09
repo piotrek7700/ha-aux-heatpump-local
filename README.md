@@ -81,7 +81,7 @@ HMI connector and wire colours:
 
 ## Controls and compatibility
 
-- Controls require a previously received **E2 settings frame** and fresh telemetry. If no E2 is stored, change a target temperature once on the HMI and allow reception. Writes stay blocked if no compatible E2 arrives.
+- Controls require a previously received **E2 settings frame** and fresh telemetry. **E2 is captured when you change a setting on the physical HMI panel**, for example the **DHW target temperature**. With the integration running, change that setpoint once and wait for the frame to be received; you can then restore your previous setpoint. E2 is not guaranteed to be sent periodically. Writes stay blocked until a compatible E2 has been captured; its template is then saved across Home Assistant restarts.
 - The last observed settings frame is saved across restarts. Fast hot water requires DHW permission ON before it can be enabled.
 - Heating/DHW switching and temperature control were confirmed on the author's TCP setup with the 0.6.6 control implementation retained in 1.0.7.
 - Version 1.0.3 accepts different hydraulic-frame lengths following **lukaszer1's older-firmware finding** (JW 2022-12-12 / JZ 2022-12-09). His missing-E2 control issue is separate and is not fixed by this change.
