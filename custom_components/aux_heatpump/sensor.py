@@ -39,7 +39,9 @@ class AuxSensor(AuxNames, CoordinatorEntity, SensorEntity):
             }
         elif "frequency" in field.key:
             self._attr_extra_state_attributes = {
-                "interpretation": "candidate; frequency field roles require further verification",
+                "interpretation": "frequency field roles require further verification",
+                "mapping_status": "candidate",
+                "description": "Frequency field role requires verification (candidate)",
                 "source": f"D{field.offset}–D{field.offset + 1} UInt16BE / 10",
             }
         if field in TEXT_FIELDS or field.key in ("heating_setpoint", "dhw_setpoint", "target_frequency"):
@@ -48,6 +50,16 @@ class AuxSensor(AuxNames, CoordinatorEntity, SensorEntity):
             self._attr_device_class = SensorDeviceClass(field.kind)
         self._attr_device_info = DeviceInfo(identifiers={(DOMAIN, entry.entry_id)},
                                             name=NAME, manufacturer="AUX", model="ACHP-H08")
+
+    @property
+    def extra_state_attributes(self):
+        attrs = getattr(self, "_attr_extra_state_attributes", None)
+        if attrs and attrs.get("mapping_status") == "candidate":
+            polish = getattr(self.coordinator, "effective_name_language", "en") == "pl"
+            description = ("Rola pola częstotliwości wymaga weryfikacji (kandydat)" if polish else
+                           "Frequency field role requires verification (candidate)")
+            return {**attrs, "description": description}
+        return attrs
 
     @property
     def available(self):

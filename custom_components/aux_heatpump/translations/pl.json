@@ -85,16 +85,16 @@
         "name": "Prędkość wentylatora"
       },
       "target_frequency": {
-        "name": "Docelowa częstotliwość sprężarki (kandydat)"
+        "name": "Docelowa częstotliwość sprężarki"
       },
       "actual_frequency": {
-        "name": "Aktualna częstotliwość sprężarki (kandydat D13)"
+        "name": "Aktualna częstotliwość sprężarki"
       },
       "frequency_d11": {
-        "name": "Częstotliwość D11 (kandydat)"
+        "name": "Częstotliwość D11"
       },
       "frequency_d37": {
-        "name": "Częstotliwość D37 (kandydat)"
+        "name": "Częstotliwość D37"
       },
       "pressure_raw": {
         "name": "Ciśnienie — surowe A7–A8"
@@ -162,13 +162,13 @@
         "name": "CWU włączone"
       },
       "dhw_activity_d31": {
-        "name": "Status CWU D31 (znaczenie niepotwierdzone)"
+        "name": "Status CWU D31"
       },
       "fast_dhw_enabled": {
         "name": "Fast hot water włączone"
       },
       "defrost_candidate": {
-        "name": "Odszranianie (kandydat)"
+        "name": "Odszranianie"
       },
       "frame_recording": {
         "name": "Nagrywanie ramek"

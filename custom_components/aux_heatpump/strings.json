@@ -85,16 +85,16 @@
         "name": "Fan speed"
       },
       "target_frequency": {
-        "name": "Target compressor frequency (candidate)"
+        "name": "Target compressor frequency"
       },
       "actual_frequency": {
-        "name": "Actual compressor frequency (D13 candidate)"
+        "name": "Actual compressor frequency"
       },
       "frequency_d11": {
-        "name": "D11 frequency (candidate)"
+        "name": "D11 frequency"
       },
       "frequency_d37": {
-        "name": "D37 frequency (candidate)"
+        "name": "D37 frequency"
       },
       "pressure_raw": {
         "name": "Pressure — raw A7–A8"
@@ -162,13 +162,13 @@
         "name": "DHW enabled"
       },
       "dhw_activity_d31": {
-        "name": "DHW D31 status (meaning unconfirmed)"
+        "name": "DHW D31 status"
       },
       "fast_dhw_enabled": {
         "name": "Fast hot water enabled"
       },
       "defrost_candidate": {
-        "name": "Defrost (candidate)"
+        "name": "Defrost"
       },
       "frame_recording": {
         "name": "Frame recording"

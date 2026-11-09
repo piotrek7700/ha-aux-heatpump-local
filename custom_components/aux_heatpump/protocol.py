@@ -46,10 +46,10 @@ FIELDS = (
     Field("expansion_valve", "Pozycja zaworu rozprężnego", D, 21, 1, False, "", "PLS"),
     Field("fan_speed", "Prędkość wentylatora", D, 17, 1, False, "", "rpm"),
     # HMI 81 Hz corresponds to 810 here; D33=86 is a different, unassigned field.
-    Field("target_frequency", "Docelowa częstotliwość sprężarki (kandydat)", D, 15, 10, False, "frequency", "Hz"),
-    Field("actual_frequency", "Aktualna częstotliwość sprężarki (kandydat D13)", D, 13, 10, False, "frequency", "Hz"),
-    Field("frequency_d11", "Częstotliwość D11 (kandydat)", D, 11, 10, False, "frequency", "Hz", False, True),
-    Field("frequency_d37", "Częstotliwość D37 (kandydat)", D, 37, 10, False, "frequency", "Hz", False, True),
+    Field("target_frequency", "Docelowa częstotliwość sprężarki", D, 15, 10, False, "frequency", "Hz"),
+    Field("actual_frequency", "Aktualna częstotliwość sprężarki", D, 13, 10, False, "frequency", "Hz"),
+    Field("frequency_d11", "Częstotliwość D11", D, 11, 10, False, "frequency", "Hz", False, True),
+    Field("frequency_d37", "Częstotliwość D37", D, 37, 10, False, "frequency", "Hz", False, True),
     Field("pressure_raw", "Ciśnienie — surowe A7–A8", A, 7, 1, False, "", None, True, True),
     Field("pressure_estimated", "Ciśnienie szacowane", A, 7, 1, True, "pressure", "kPa"),
 )
@@ -83,10 +83,11 @@ BINARY_FIELDS = (
     # B7 low bits track CWU permission even when idle (observed 03/13/53).
     # Bits 0 and 1 have always matched in captures; use bit0, preserve raw diagnostic.
     BinaryField("dhw_enabled", "CWU włączone", B, 7, 0x01),
-    BinaryField("dhw_activity_d31", "Status CWU D31 (znaczenie niepotwierdzone)", D, 31, 0x40, diagnostic=True),
+    BinaryField("dhw_activity_d31", "Status CWU D31", D, 31, 0x40, diagnostic=True),
     BinaryField("fast_dhw_enabled", "Fast hot water włączone", B, 8, 0x02),
-    # One HMI-snowflake-confirmed cycle; candidate, not a manufacturer mapping.
-    BinaryField("defrost_candidate", "Odszranianie (kandydat)", D, 32, 0x20, diagnostic=True),
+    # One HMI-confirmed cycle plus five matching recorded cycles (2026-11-09).
+    # Keep the original key for entity/automation compatibility.
+    BinaryField("defrost_candidate", "Odszranianie", D, 32, 0x20),
 )
 
 # Firmware dates match the photographed display; version codes are still uncertain.

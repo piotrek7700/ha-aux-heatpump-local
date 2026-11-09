@@ -38,12 +38,17 @@ class AuxBinarySensor(AuxNames, CoordinatorEntity, BinarySensorEntity):
     def extra_state_attributes(self):
         if self.field.key == "defrost_candidate":
             return {"source": "D32 & 0x20", "frame_prefix": "7e f1 f1 12 2d 12 12",
-                    "offset_base": 0, "interpretation": "candidate defrost status",
-                    "validation": "one cycle confirmed by HMI snowflake; repeat validation needed"}
+                    "offset_base": 0, "interpretation": "defrost cycle including preparation",
+                    "mapping_status": "empirically_verified",
+                    "validation": "one HMI-confirmed cycle and five additional matching recorded cycles"}
         if self.field.key == "dhw_enabled":
             return {"source": "B7 & 0x01", "interpretation": "DHW permission; empirical mapping"}
         if self.field.key == "dhw_activity_d31":
-            return {"source": "D31 & 0x40", "interpretation": "meaning unconfirmed; separate from permission"}
+            return {"source": "D31 & 0x40", "interpretation": "meaning unconfirmed; separate from permission",
+                    "mapping_status": "candidate",
+                    "description": ("Znaczenie statusu CWU D31 wymaga weryfikacji (kandydat)"
+                        if getattr(self.coordinator, "effective_name_language", "en") == "pl" else
+                        "DHW D31 meaning requires verification (candidate)")}
         return None
 
     @property

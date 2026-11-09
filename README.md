@@ -9,7 +9,7 @@ Developed with an **AUX ACHP-H08/4R3HA-I** and a **USR-DR164**.
 - Temperatures: outdoor, suction/discharge, heat exchanger, inverter, refrigerant inlet/outlet, water inlet/outlet, DHW tank, buffer, IBH outlet and FLH inlet.
 - Operating data: water flow, currents, DC voltage, fan speed and expansion valve position.
 - Valve, circulation pump and electric heater states.
-- **Defrost (candidate)** in Diagnostics; based on one HMI-confirmed cycle.
+- **Defrost** in Sensors; supported by one HMI-confirmed cycle and five additional matching recorded cycles.
 - Heating and DHW ON/OFF, both target temperatures, Fast hot water and a heating thermostat.
 - Mapped service settings, firmware dates and last received settings timestamp.
 - Polish/English entity names, selectable on the device page.
@@ -83,7 +83,7 @@ HMI connector and wire colours:
 
 - Controls require a previously received **E2 settings frame** and fresh telemetry. If no E2 is stored, change a target temperature once on the HMI and allow reception. Writes stay blocked if no compatible E2 arrives.
 - The last observed settings frame is saved across restarts. Fast hot water requires DHW permission ON before it can be enabled.
-- Heating/DHW switching and temperature control were confirmed on the author's TCP setup with the 0.6.6 control implementation retained in 1.0.6.
+- Heating/DHW switching and temperature control were confirmed on the author's TCP setup with the 0.6.6 control implementation retained in 1.0.7.
 - Version 1.0.3 accepts different hydraulic-frame lengths following **lukaszer1's older-firmware finding** (JW 2022-12-12 / JZ 2022-12-09). His missing-E2 control issue is separate and is not fixed by this change.
 - Pressure is an empirical estimate over approximately **536–3984 kPa**; the lower segment is interpolated from the new 536 kPa point to the existing curve. Compressor frequency roles remain experimental.
 - Active disinfection and the GAZ/external heat-source request are not confirmed mappings. Energy consumption is not mapped.
@@ -109,6 +109,7 @@ The table is the 1.0.0 reference. Its B-frame length `2D` describes the original
 
 ## Release notes
 
+- **1.0.7** — Moved Defrost to Sensors; uncertainty notes are in entity attributes, with existing entity IDs preserved.
 - **1.0.6** — Added seven-day diagnostic frame recording, stop/status controls and ZIP download.
 - **1.0.5** — Added the read-only Defrost (candidate) diagnostic entity.
 - **1.0.4** — Fixed unavailable low-pressure readings by interpreting the pressure word as signed; added the 536 kPa calibration point.
